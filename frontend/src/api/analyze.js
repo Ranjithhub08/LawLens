@@ -11,7 +11,7 @@ export const analyzeBill = async (billText, question, language) => {
       language: language
     };
 
-    const response = await axios.post('http://localhost:8000/analyze', payload);
+    const response = await axios.post('/api/analyze', payload);
     return response.data;
   } catch (error) {
     return { error: "Failed to connect to backend", details: error.message };
@@ -29,7 +29,7 @@ export const compareBills = async (oldBillText, newBillText, question) => {
       question: question
     };
 
-    const response = await axios.post('http://localhost:8000/compare', payload);
+    const response = await axios.post('/api/compare', payload);
     return response.data;
   } catch (error) {
     return { error: "Failed to connect to backend for comparison", details: error.message };
