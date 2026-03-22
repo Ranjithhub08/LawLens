@@ -12,7 +12,7 @@ def call_gemini(prompt: str) -> str:
         print("ERROR: GEMINI_API_KEY is not set.")
         return "AI processing failed"
     
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key={api_key}"
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={api_key}"
     data = {"contents": [{"parts": [{"text": prompt}]}]}
     req = urllib.request.Request(
         url, 
