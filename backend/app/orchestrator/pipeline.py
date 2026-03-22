@@ -8,7 +8,23 @@ from app.modules.formatting.service import format_output
 
 logger = logging.getLogger(__name__)
 
-def run_pipeline(bill_text: str, question: str, language: str) -> dict:
+def run_pipeline(bill_text: str, question: str, language: str, demo_mode: bool = False) -> dict:
+    if demo_mode:
+        logger.info("Demo mode active: Returning simulated high-fidelity synthesis")
+        demo_answer = (
+            "The Legislative Data Privacy Act (LDPA) establishes a comprehensive framework for the "
+            "protection of sensitive personal information. Under Section 1, the penalty for "
+            "unauthorized data sharing or distribution is strictly defined as an immediate fine of "
+            "$10,000, coupled with mandatory platform suspension. The document further mandates "
+            "strict anonymization protocols for all shared datasets to ensure compliance with "
+            "global privacy standards.\n\n"
+            "**Core Legal Findings**:\n"
+            "- **Statutory Penalty**: Immediate $10,000 fine per violation (Section 1)\n"
+            "- **Liability**: Unauthorized data distribution or secondary sharing\n"
+            "- **Enforcement**: Automatic platform suspension and protocol auditing"
+        )
+        return format_output(demo_answer)
+
     try:
         logger.info("preprocessing started")
         clean_text = preprocess_text(bill_text)
@@ -43,7 +59,22 @@ def run_pipeline(bill_text: str, question: str, language: str) -> dict:
             "details": str(e)
         }
 
-def run_comparison(old_bill: str, new_bill: str, question: str) -> dict:
+def run_comparison(old_bill: str, new_bill: str, question: str, demo_mode: bool = False) -> dict:
+    if demo_mode:
+        logger.info("Demo mode active: Returning simulated high-fidelity comparison")
+        compare_demo = (
+            "The comparison between Version A and Version B reveals a significant escalation in enforcement. "
+            "The penalty for unauthorized data sharing has increased from a $2,000 fine (Old Version) "
+            "to a mandatory $10,000 fine coupled with immediate platform suspension (New Version). "
+            "Additionally, the new draft introduces strict anonymization protocols (LDPA Section 4.5) "
+            "not present in the original legislation."
+        )
+        fmt = format_output(compare_demo)
+        return {
+            "changes": fmt["answer"],
+            "confidence": "High"
+        }
+
     try:
         logger.info("comparison preprocessing started")
         clean_old = preprocess_text(old_bill)

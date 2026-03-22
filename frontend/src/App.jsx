@@ -15,6 +15,8 @@ function App() {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [demoMode, setDemoMode] = useState(false); // Manual toggle for mentors
+
 
   const handleFileUpload = async (e, type) => {
     if (e.target.files && e.target.files[0]) {
@@ -48,10 +50,10 @@ function App() {
 
     let response;
     if (mode === "analyze") {
-        response = await analyzeBill(fileText, question, language);
+        response = await analyzeBill(fileText, question, language, demoMode);
     } else {
         const compQuestion = question || "What changed between the two versions?";
-        response = await compareBills(oldFileText, newFileText, compQuestion);
+        response = await compareBills(oldFileText, newFileText, compQuestion, demoMode);
     }
     
     if (response.error) {
@@ -180,7 +182,19 @@ function App() {
             )}
           </motion.div>
 
-          <motion.div variants={fadeInUp} className="flex justify-center pt-4">
+          <motion.div variants={fadeInUp} className="flex flex-col md:flex-row justify-center items-center gap-4 pt-4">
+            {/* Demo Mode Toggle */}
+            <div className="flex items-center gap-2 bg-slate-900/50 px-3 py-1.5 rounded-full border border-slate-700/50 shadow-inner">
+              <span className={`text-[10px] font-bold uppercase tracking-wider ${demoMode ? 'text-blue-400' : 'text-slate-500'}`}>
+                {demoMode ? 'Demo Mode Active' : 'Live mode'}
+              </span>
+              <button 
+                onClick={() => setDemoMode(!demoMode)}
+                className={`w-8 h-4 rounded-full relative transition-colors duration-200 ${demoMode ? 'bg-blue-600' : 'bg-slate-600'}`}
+              >
+                <div className={`absolute top-0.5 w-3 h-3 bg-white rounded-full transition-transform duration-200 ${demoMode ? 'translate-x-4' : 'translate-x-0.5'}`} />
+              </button>
+            </div>
             <button 
               onClick={handleExecute} disabled={loading}
               className="group relative rounded-2xl p-[2px] w-full md:w-auto min-w-[240px] hover:scale-105 transition-transform"

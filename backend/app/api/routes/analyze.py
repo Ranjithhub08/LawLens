@@ -20,7 +20,7 @@ def analyze(request: AnalyzeRequest):
     save_document(doc_id, request.bill_text)
 
     try:
-        result = run_pipeline(request.bill_text, request.question, request.language)
+        result = run_pipeline(request.bill_text, request.question, request.language, request.demo_mode)
         
         # Transparently inject doc_id into response mapping for frontend tracking
         if isinstance(result, dict) and "error" not in result:
@@ -50,7 +50,7 @@ def compare(request: CompareRequest):
     save_document(new_id, request.new_bill)
 
     try:
-        result = run_comparison(request.old_bill, request.new_bill, request.question)
+        result = run_comparison(request.old_bill, request.new_bill, request.question, request.demo_mode)
         
         # Transparently bundle the document IDs securely if needed
         if isinstance(result, dict) and "error" not in result:
