@@ -36,3 +36,18 @@ jobs:
         run: cd frontend && npm install
       - name: Build
         run: cd frontend && npm run build
+
+  backend-test:
+    name: Backend - Unit Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+      - name: Install dependencies
+        run: pip install fastapi uvicorn pydantic pytest httpx
+      - name: Run tests
+        run: python -m pytest backend/tests/ -v --tb=short
