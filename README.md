@@ -4,6 +4,10 @@
 [![React](https://img.shields.io/badge/React-18.0.0+-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev/)
 [![Gemini 1.5-Flash](https://img.shields.io/badge/AI-Gemini%201.5--Flash-4285F4?style=flat-square&logo=google-gemini&logoColor=white)](https://deepmind.google/technologies/gemini/)
 [![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-black?style=flat-square&logo=vercel)](https://law-lens-pnpbexqvp-ranjithhub08s-projects.vercel.app)
+
+
+> 🔗 **[Live Demo →](https://law-lens-pnpbexqvp-ranjithhub08s-projects.vercel.app)**
 
 **LawLens** is a state-of-the-art, AI-powered legislative analysis platform. It translates complex legal jargon into clear, actionable insights in seconds. Built for legal professionals, researchers, and policy-makers, LawLens uses advanced LLM orchestration to provide deep document synthesis and version-to-version comparisons.
 
